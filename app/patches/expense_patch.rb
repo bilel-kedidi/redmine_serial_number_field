@@ -1,7 +1,7 @@
-require_dependency 'issue'
+require_dependency 'expense'
 
 module SerialNumberField
-  module IssuePatch
+  module ExpensePatch
     extend ActiveSupport::Concern
 
     included do
@@ -28,13 +28,12 @@ module SerialNumberField
 
     def serial_number_custom_value(cf)
       CustomValue.where(:custom_field_id => cf.id,
-        :customized_type => 'Issue',
+        :customized_type => 'Expense',
         :customized_id => self.id).first
     end
 
-
     def serial_number_fields
-      editable_custom_fields.select do |value|
+      available_custom_fields.select do |value|
         value.field_format == SerialNumberField::Format::NAME
       end
     end
@@ -42,6 +41,6 @@ module SerialNumberField
   end
 end
 
-SerialNumberField::IssuePatch.tap do |mod|
-  Issue.send :include, mod unless Issue.include?(mod)
+SerialNumberField::ExpensePatch.tap do |mod|
+  Expense.send :include, mod unless Expense.include?(mod)
 end

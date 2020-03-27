@@ -9,14 +9,14 @@ module SerialNumberField
 
     MATCHERS = {
         :TOW_DIGIT_NUMBER  => /\d{2}/,
-        :FOUR_DIGIT_NUMBER => /\d{4}/,
+        :THREE_DIGIT_NUMBER => /\d{3}/,
         :FORMAT_WRAPPER    => /\{(.+?)\}/
     }
 
     DATE_FORMATS = {
-        :'yyyy' => { :strftime => '%Y', :financial_year => false, :regexp => MATCHERS[:FOUR_DIGIT_NUMBER] },
+        :'yyyy' => { :strftime => '%Y', :financial_year => false, :regexp => MATCHERS[:THREE_DIGIT_NUMBER] },
         :'yy'   => { :strftime => '%y', :financial_year => false, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] },
-        :'YYYY' => { :strftime => '%Y', :financial_year => true, :regexp => MATCHERS[:FOUR_DIGIT_NUMBER] },
+        :'YYYY' => { :strftime => '%Y', :financial_year => true, :regexp => MATCHERS[:THREE_DIGIT_NUMBER] },
         :'YY'   => { :strftime => '%y', :financial_year => true, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] }
     }
 

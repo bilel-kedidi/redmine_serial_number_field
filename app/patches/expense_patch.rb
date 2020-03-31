@@ -6,6 +6,7 @@ module SerialNumberField
 
     included do
       after_save :assign_serial_number!
+      after_save :save_computed_field
     end
 
     def assign_serial_number!
@@ -19,6 +20,15 @@ module SerialNumberField
           target_custom_value.update_attributes!(
             :value => new_serial_number)
         end
+      end
+    end
+
+    def save_computed_field
+      custom_values.each do |target_custom_value|
+        next unless target_custom_value.custom_field.is_computed?
+        new_value = eval_computed_field target_custom_value.custom_field
+        target_custom_value.update_attributes!(
+            :value => new_value)
       end
     end
 

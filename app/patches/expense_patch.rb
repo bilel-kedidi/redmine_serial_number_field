@@ -28,7 +28,7 @@ module SerialNumberField
         next unless target_custom_value.custom_field.is_computed?
         new_value = eval_computed_field target_custom_value.custom_field
         target_custom_value.update_attributes!(
-            :value => new_value)
+            :value => new_value[target_custom_value.custom_field.id])
       end
     end
 

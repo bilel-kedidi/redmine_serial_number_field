@@ -10,14 +10,17 @@ module SerialNumberField
     MATCHERS = {
         :TOW_DIGIT_NUMBER  => /\d{2}/,
         :THREE_DIGIT_NUMBER => /\d{3}/,
+        :FOUR_DIGIT_NUMBER => /\d{4}/,
         :FORMAT_WRAPPER    => /\{(.+?)\}/
     }
 
     DATE_FORMATS = {
-        :'yyyy' => { :strftime => '%Y', :financial_year => false, :regexp => MATCHERS[:THREE_DIGIT_NUMBER] },
+        :'yyyy' => { :strftime => '%Y', :financial_year => false, :regexp => MATCHERS[:FOUR_DIGIT_NUMBER] },
         :'yy'   => { :strftime => '%y', :financial_year => false, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] },
-        :'YYYY' => { :strftime => '%Y', :financial_year => true, :regexp => MATCHERS[:THREE_DIGIT_NUMBER] },
-        :'YY'   => { :strftime => '%y', :financial_year => true, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] }
+        :'YYYY' => { :strftime => '%Y', :financial_year => true, :regexp => MATCHERS[:FOUR_DIGIT_NUMBER] },
+        :'YY'   => { :strftime => '%y', :financial_year => true, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] },
+        :'mm'   => { :strftime => '%m', :financial_year => false, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] },
+        :'MM'   => { :strftime => '%m', :financial_year => false, :regexp => MATCHERS[:TOW_DIGIT_NUMBER] }
     }
 
     def validate_custom_field(custom_field)

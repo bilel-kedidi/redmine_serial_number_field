@@ -26,6 +26,7 @@ module SerialNumberField
 
     def save_computed_field
       self.reload
+      @expense_updated = true
       @grouped_cfvs = nil
       self.custom_values.each do |target_custom_value|
         next unless target_custom_value.custom_field.is_computed?
